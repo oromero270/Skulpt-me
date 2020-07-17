@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}"> 
+</head>
+<div id="shell">
+
+    <body>
+        <a id="myhome" href="/home">Home</a>
+    <header> <h1>Progrerss History</h1></header><br>
+        <table>
+            <tr>
+                <th>Situps</th>
+                <th>Pushups</th>
+                <th>Plank time</th>
+                <th>Squats</th>
+                <th>Date added</th>
+            </tr>
+            {% for i in info%}
+            <tr>
+                <td>{{i.situps}}</td>
+                <td>{{i.pushups}}</td>
+                <td>{{i.plank_time}}</td>
+                <td>{{i.squats}}</td>
+                <td>{{i.created_at}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</div>
+
+</html>

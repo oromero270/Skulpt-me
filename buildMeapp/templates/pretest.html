@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretest</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}"> 
+    <style>
+        ul{
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="shell">
+        <a id="myhome" href="/home">Home</a>
+    <header><h1 >You are about to begin the fitness test {{myinfo.username}}</h1></header>
+        <br>
+        <div id="workoutbox">
+            <p>You will be tested on <a href="https://www.youtube.com/watch?v=jDwoBqPH0jk">situps</a>, <a href="https://www.youtube.com/watch?v=IODxDxX7oi4">pushups</a>, <a href="https://www.youtube.com/watch?v=pvIjsG5Svck">plank time</a>, and <a
+                href="https://www.youtube.com/watch?v=EbOPpWi4L8s"">squats</a>. You are suggested to re-test every other week in order to better track your
+            progress.
+            You will have a max time of two(2) minutes to complete each exercise but are not required to use the entire
+            allotted time, although it is encouraged. </p></div>
+        <br>
+        <div id="test_progress">
+            <h3>Personal Best</h3>
+            <ul>Situps:{{fit}} </ul>
+            <ul>Pushups:{{push}} </ul>
+            <ul>Plank Time:{{plank}} </ul>
+            <ul>Squats:{{squat}} </ul>
+            <br>
+        </div>
+        <div class="listen">
+            <p>ATTENTION: The test timer will begin imidiatly when you click the button below</p>
+            <a href="/test1" class="button2">Begin</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plank</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}"> 
+    <style>
+        body {
+            height: 100vh;
+            place-items: center;
+        }
+
+        .container {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            background-color: rgb(50, 112, 38);
+            width: fit-content;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .screen {
+            margin: 0;
+            background-color: #cfcfcf;
+            color: #061539;
+            font-size: 64px;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: default;
+            user-select: none;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .screen span {
+            display: inline-block;
+            width: 85px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            margin: 10px -5px 0;
+        }
+
+        .buttons button {
+            flex: 1;
+            margin: 0 5px;
+            border: none;
+            font-size: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            color: #061539;
+            background-color: #88CC88;
+            outline: none;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            color: #88CC88;
+            background-color: #061539;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="shell">
+    <header><h1>Test #3 Plank</h1></header>
+    <div class="container">
+        <h1 class="screen">
+            <span id="minutes">
+                00
+            </span>:<span id="seconds">
+                00
+            </span>:<span id="hundredths">
+                00
+            </span>
+        </h1>
+        <div class="buttons">
+            <button id="start">START</button>
+            <button id="stop">STOP</button>
+            <button id="reset">RESET</button>
+        </div>
+    </div>
+    <br>
+    <div id="test_progress">
+        <p>Active user: {{myinfo.username}} </p>
+        <p>Situps:{{count}}</p>
+        <p>Pushups:{{count2}}</p>
+    </div>
+
+    <div id="subbox">
+        <form action="/sub3" method="POST">
+            {% csrf_token %}
+            <p>Time Planked </p>
+            <p>(Round to the nearest second)</p>
+            <p>Exp: Actual time (00:25:36) --> what I submint (25)</p>
+            <div class="next">
+                <input type="number" name="planktest"  min="0">
+                <p>Sec</p><br>
+                </div>
+            </div>
+            <div class="listen">
+            <p>ATTENTION: The test timer will begin imidiatly when you click the button below</p>
+            <button type="submit">Next <br>(Squats)</button>
+        </div>
+        </form>
+    </div>
+    <div id="errorswindow">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+    <script>
+        class State {
+            constructor(startTimestamp, difference, suspended) {
+                this.startTimestamp = startTimestamp;
+                this.difference = difference;
+                this.suspended = suspended;
+            }
+
+            static ready() {
+                return new State(null, 0, 0);
+            }
+        }
+
+        class Stopwatch {
+            constructor(state) {
+                this.state = state;
+                this.requestAnimationId = null;
+                this.handleClickStart = this.handleClickStart.bind(this);
+                document
+                    .getElementById("start")
+                    .addEventListener("click", this.handleClickStart);
+                this.handleClickStop = this.handleClickStop.bind(this);
+                document
+                    .getElementById("stop")
+                    .addEventListener("click", this.handleClickStop);
+                this.handleClickReset = this.handleClickReset.bind(this);
+                document
+                    .getElementById("reset")
+                    .addEventListener("click", this.handleClickReset);
+                this.tick = this.tick.bind(this);
+                this.render();
+            }
+
+            static ready() {
+                return new Stopwatch(State.ready());
+            }
+
+            setState(newState) {
+                this.state = { ...this.state, ...newState };
+                this.render();
+            }
+
+            tick() {
+                this.setState({
+                    difference: new Date(new Date() - this.state.startTimestamp)
+                });
+                this.requestAnimationId = requestAnimationFrame(this.tick);
+            }
+
+            handleClickStart() {
+                if (this.state.startTimestamp) {
+                    // Prevent multi clicks on start
+                    return;
+                }
+                this.setState({
+                    startTimestamp: new Date() - this.state.suspended,
+                    suspended: 0
+                });
+                this.requestAnimationId = requestAnimationFrame(this.tick);
+            }
+
+            handleClickStop() {
+                cancelAnimationFrame(this.requestAnimationId);
+                this.setState({
+                    startTimestamp: null,
+                    suspended: this.state.difference
+                });
+            }
+
+            handleClickReset() {
+                cancelAnimationFrame(this.requestAnimationId);
+                this.setState(State.ready());
+            }
+
+            render() {
+                const { difference } = this.state;
+                const hundredths = (difference
+                    ? Math.floor(difference.getMilliseconds() / 10)
+                    : 0
+                )
+                    .toString()
+                    .padStart(2, "0");
+                const seconds = (difference ? Math.floor(difference.getSeconds()) : 0)
+                    .toString()
+                    .padStart(2, "0");
+                const minutes = (difference ? Math.floor(difference.getMinutes()) : 0)
+                    .toString()
+                    .padStart(2, "0");
+
+                // Render screen
+                document.getElementById("minutes").textContent = minutes;
+                document.getElementById("seconds").textContent = seconds;
+                document.getElementById("hundredths").textContent = hundredths;
+            }
+        }
+
+        const STOPWATCH = Stopwatch.ready();
+
+    </script>
+</body>
+
+</html>

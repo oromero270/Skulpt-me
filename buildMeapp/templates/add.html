@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add workout</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}"> 
+</head>
+
+<body>
+    <div id="shell">
+        <header>
+            <h1>Let us add a workout!</h1>
+        </header>
+        <div id="workoutbox_pretest">
+            <form action="/adding" method="POST">
+                {% csrf_token %}
+                <p>Name of workout</p>
+                <input type="text" name="wname"><br>
+                <p>Gear required</p>
+                <div id="row">
+                    <input type="checkbox" name="gear" value="none">
+                    <label for="none"> None</label><br>
+                    <input type="checkbox" name="gear" value="dbells">
+                    <label for="dbells"> Dumbells</label><br>
+                    <input type="checkbox" name="gear" value="bar">
+                    <label for="bar"> Pull up bar</label><br>
+                    <input type="checkbox" name="gear" value="band">
+                    <label for="band"> Resistance band</label><br>
+                </div>
+                <p>Workout focus</p>
+                <div id="row">
+                    <input type="radio" id="1" name="focus" value="upper">
+                    <label for="upper">Upper Body </label><br>
+                    <input type="radio" id="2" name="focus" value="lower">
+                    <label for="lower">Lower Body </label><br>
+                    <input type="radio" id="3" name="focus" value="full">
+                    <label for="full">Full Body</label><br>
+                </div>
+                <p>Difficulty</p>
+                <div id="row">
+                    <input type="radio" id="1" name="difficulty" value="easy">
+                    <label for="easy">Easy</label><br>
+                    <input type="radio" id="2" name="difficulty" value="med">
+                    <label for="med">Intermidiate</label><br>
+                    <input type="radio" id="3" name="difficulty" value="hard">
+                    <label for="hard">Hard</label><br>
+                </div>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

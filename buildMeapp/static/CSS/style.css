@@ -1,0 +1,202 @@
+    * {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        vertical-align:top;
+    }
+
+    body{
+        margin: 0px;
+    }
+
+    #shell {
+        padding: 25px;
+        height: 900px;
+        background: linear-gradient(to bottom, #3366cc 1%, #66ccff 100%)
+    }
+
+
+    header {
+        display: flex;
+        justify-content: space-evenly;
+        width: fit-content;            
+        margin: auto;
+        color: white;
+        background: #2A293E;
+        border: groove 4px rgb(231, 212, 42);
+        box-shadow: #000000;
+        border-bottom-style:outset;
+        padding: 20px;
+        padding-bottom: 0px;
+    }
+
+    img{
+        height: 125px;
+        display: flex;
+        justify-content: end;        
+    }
+
+    h1{
+        display: flex;
+        align-items: center;
+    }
+
+    #footer {
+        display: flex;
+        justify-content: center;
+        border: black solid 2px;
+        height: auto;
+        width: 90px;
+        margin: auto;
+        margin-top: 10px;
+        background-color: black;
+    }
+    #footer a{
+        color: white;
+    }
+
+    #workoutbox {
+        background: linear-gradient(to bottom right, #6699ff 1%, #ffffff 100%);
+        border: groove 2px black;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: fit-content;
+        padding: 20px;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    #test_progress{
+        height: auto;
+        width: fit-content;
+        padding: 20px;
+        border: groove 4px black;
+        background: linear-gradient(to bottom right, #6699ff 1%, #ffffff 100%);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+    .listen {
+        border: 4px rgb(192, 3, 3) solid;
+        border-bottom-style:outset;
+        background: linear-gradient(to bottom, #000000 59%, #666699 122%);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        padding: 20px;
+        margin: auto;
+    }
+
+    a.button3 {
+        display: flex;
+        padding: 0.3em 1.2em;
+        margin: 0 0.3em 0.3em 0;
+        border-radius: 1em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-weight: 300;
+        color: #FFFFFF;
+        background-color: #4eb5f1;
+        justify-content: center;
+        transition: all 0.2s;
+        margin-top: 99px;
+        margin-left: 18px;
+        text-align: center;
+    }
+    a.button2 {
+        display: flex;
+        padding: 0.3em 1.2em;
+        margin: 0 0.3em 0.3em 0;
+        border-radius: 1em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-weight: 300;
+        color: #FFFFFF;
+        background-color: #4eb5f1;
+        justify-content: center;
+        transition: all 0.2s;
+        margin-top: 15px;
+        margin-left: 18px;
+        text-align: center;
+    }
+    #myhome {
+        color: white;
+    }
+    #clock{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    form{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    #subbox{
+        width: fit-content;
+        height: auto;
+        border: black solid 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        margin: auto;
+    }
+
+    a.button3:hover {
+        background-color: #4095c6;
+    }
+
+    @media all and (max-width:30em) {
+        a.button3 {
+            display: block;
+            margin: 0.2em auto;
+        }
+    }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        display: flex;
+        justify-content: center;
+    }
+
+    td,
+    th {
+        border: 1px solid #160a0a;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dfe6e9;
+    }
+    tr:nth-child(odd) {
+        background-color: #575757;
+    }
+    h1{
+        display: flex;
+        justify-content: center;
+    }
+/* This will begin my workout pages css */
+    #row{
+        display: flex;
+
+    }
+    #workoutbox_pretest{
+        background: linear-gradient(to bottom right, #6699ff 1%, #ffffff 100%);
+        border: groove 2px black;
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: fit-content;
+        padding: 20px;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    #workoutbox_pretest p{
+        text-decoration: underline;
+        font-weight: 800;
+    }
+

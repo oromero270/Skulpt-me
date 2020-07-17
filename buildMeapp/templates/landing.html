@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build me</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        #slide {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #logme {
+            height: auto;
+            width: fit-content;
+            padding: 20px;
+            border: groove 4px black;
+            background: linear-gradient(to bottom right, #6699ff 1%, #ffffff 100%);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: auto;
+        }
+        ul,li{
+            color: red;
+            background-color: black;
+            width: fit-content;
+            height: auto;
+        }
+        #registrationMsg{
+            background-color: black;
+            width: fit-content;
+            height: auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="shell">
+        <header>
+            <h1>Welcome to the start of Build Me!</h1>
+        </header>
+
+        <div id="slide">
+            <div id="test_progress">
+                <h3>REGISTER</h3><br>
+                <div id="registrationMsg" ></div>
+                <form action="/submitinfo" method="post" id="regform">
+                    {% csrf_token %}
+                    <p>First Name:</p>
+                    <input type="text" name="fname" id="">
+                    <p>Last Name:</p>
+                    <input type="text" name="lname" id="">
+                    <p>Email</p>
+                    <input type="email" name="mail" id="">
+                    <p>Username:</p>
+                    <input type="text" name="acctname" id="username">
+                    <p>Password</p>
+                    <input type="password" name="pw" id="">
+                    <p>Confirm Password</p>
+                    <input type="password" name="cpw" id=""><br><br>
+                    <button type="submit">Register</button>
+                </form>
+
+            </div>
+            <div id="errorswindow">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{ message }}
+                    </li>
+                </ul>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div id="logme">
+                <H3>LOGIN</H3>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <p>Username</p>
+                    <input type="text" name="acctname" id=""><br>
+                    <p>Password</p>
+                    <input type="password" name="pw" id=""><br><br>
+                    <button type="submit">log in</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#username').keyup(function (event) {
+            event.preventDefault();
+            var data = $("#regform").serialize()
+
+            $.post(
+                "/Val", data, function (sresponse) {
+                    $("#registrationMsg").html(sresponse)
+                }
+            )
+        })
+
+
+    </script>
+</body>
+
+</html>

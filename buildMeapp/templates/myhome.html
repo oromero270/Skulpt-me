@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}"> 
+</head>
+
+<body>
+    <div id="shell">
+        <header>
+            <h1>Welcome {{myinfo.username}}</h1>
+            <img src="{% static 'morty.png' %}" />
+        </header>
+        <div id="workoutbox">
+            <p>Click on the workout button if you are ready to start a workout.<br>
+                Workouts will be auto populated after a few simple inputs.</p>
+            <a href="/home/workout" class="button3">Workout</a>
+        </div>
+        <br>
+        <div id="workoutbox">
+            <p>Click on the history button if you want to check your test scores. <br>
+                This will allow you to track your fitness progress over time.</p>
+            <a href="/home/stats" class="button3">History</a>
+        </div>
+        <br>
+        <div id="workoutbox">
+            <p>Click here if you are ready to begin a fitness test.<br>
+                Follow the directions as prompted to ensure the best results.
+            </p>
+            <a href="/home/pretest" class="button3">Begin test</a>
+        </div>
+
+        <div id="footer"><a href="/logout">log out</a></div>
+    </div>
+</body>
+
+</html>
